@@ -1,0 +1,32 @@
+services:
+  web_server:
+    build: .
+    ports:
+      - ${WEB_SERVER_PORT}:3000
+    depends_on:
+      - database
+    container_name: track-trail-webserver
+    working_dir: /app
+    command: pm2-runtime start pm2.json
+    volumes:
+      - ./track-trail-app:/app
+    environment:
+      - TZ=Europe/Berlin
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_HOST=database
+      - MYSQL_PORT=3306
+  database:
+    image: yobasystems/alpine-mariadb:10.11.8
+    container_name: track-trail-database
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=Europe/Berlin
+    volumes:
+     - ./data/db/mysql:/var/lib/mysql

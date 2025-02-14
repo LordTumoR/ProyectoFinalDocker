@@ -5,6 +5,7 @@ services:
       - ${WEB_SERVER_PORT}:3000
     depends_on:
       - database
+      - mongodb
     container_name: track-trail-webserver
     working_dir: /app
     command: pm2-runtime start pm2.json
@@ -17,6 +18,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_HOST=database
       - MYSQL_PORT=3306
+      - MONGO_URI=${MONGODB_URI}
   database:
     image: yobasystems/alpine-mariadb:10.11.8
     container_name: track-trail-database
@@ -30,3 +32,13 @@ services:
       - TZ=Europe/Berlin
     volumes:
      - ./data/db/mysql:/var/lib/mysql
+  mongodb:
+    image: mongo:6
+    container_name: tracktrail-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./data/mongo:/data/db

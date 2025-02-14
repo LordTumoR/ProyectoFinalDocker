@@ -1,4 +1,5 @@
 import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
+import { UploadEntity } from 'src/upload/upload.entity';
 import { User } from 'src/users/users.entity';
 import {
   Entity,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class routine {
+export class Routine {
   @PrimaryGeneratedColumn()
   id_routine: number;
 
@@ -31,6 +32,9 @@ export class routine {
 
   @Column()
   progress: string;
+  
+  @Column()
+  imageurl: string;
 
   @ManyToOne(() => User, (user) => user.routines,{
     cascade: true,
@@ -41,4 +45,7 @@ export class routine {
 
   @OneToMany(() => RoutineExercises, (routineExercises) => routineExercises.routines)
   routines_exercises: RoutineExercises[];
+  
+  @OneToMany(() => UploadEntity, (upload) => upload.Routine)
+  uploads: UploadEntity[];
 }

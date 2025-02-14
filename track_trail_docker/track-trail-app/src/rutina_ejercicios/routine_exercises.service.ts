@@ -75,6 +75,9 @@ export class RoutineExercisesService {
     if (updateRoutineExercisesDto.id_exercise) {
       routineExercise.ejercicios = { id_exercises: updateRoutineExercisesDto.id_exercise } as any;
     }
+    if (updateRoutineExercisesDto.completado !== undefined) {
+      routineExercise.completado = updateRoutineExercisesDto.completado;
+    }
     if (updateRoutineExercisesDto.date_start) {
       routineExercise.date_start = updateRoutineExercisesDto.date_start;
     }
@@ -91,4 +94,21 @@ export class RoutineExercisesService {
       throw new HttpException('Routine Exercise not found', HttpStatus.NOT_FOUND);
     }
   }
+  async calculateCompletionPercentage(routineId: number): Promise<{ percentage: number }> {
+    const totalExercises = await this.routineExercisesRepository
+      .createQueryBuilder('routineExercises')
+      .where('routineExercises.routines = :routineId', { routineId })
+      .getCount();
+  
+    const completedExercises = await this.routineExercisesRepository
+      .createQueryBuilder('routineExercises')
+      .where('routineExercises.routines = :routineId', { routineId })
+      .andWhere('routineExercises.completado = true')
+      .getCount();
+  
+    const percentage = totalExercises > 0 ? (completedExercises / totalExercises) * 100 : 0;
+  
+    return { percentage };
+  }
+  
 }

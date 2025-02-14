@@ -3,22 +3,22 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UtilsService } from '../utils/utils.service';
 import { CreateRoutineDto, UpdateRoutineDto } from './routine.dto';
-import { routine } from './routine.entity';
+import { Routine } from './routine.entity';
 import { User } from 'src/users/users.entity';
 
 @Injectable()
 export class RoutineService {
   constructor(
     private readonly utilsService: UtilsService,
-    @InjectRepository(routine)
-    private readonly routineRepository: Repository<routine>,
+    @InjectRepository(Routine)
+    private readonly routineRepository: Repository<Routine>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
 
-  async getAllRoutines(xml?: string): Promise<routine[] | string> {
+  async getAllRoutines(xml?: string): Promise<Routine[] | string> {
     const routines = await this.routineRepository.find({
-      relations: ['user'], 
+      relations: ['user','uploads'], 
     });
   
     if (xml === 'true') {
@@ -32,7 +32,7 @@ export class RoutineService {
   }
   
 
-  async createRoutine(createRoutineDto: CreateRoutineDto): Promise<routine> {
+  async createRoutine(createRoutineDto: CreateRoutineDto): Promise<Routine> {
     const user = await this.userRepository.findOne({
       where: { id_user: createRoutineDto.id_user },
     });
@@ -49,7 +49,7 @@ export class RoutineService {
     return await this.routineRepository.save(newRoutine);
   }
 
-  async getRoutine(id_routine: number, xml?: string): Promise<routine | string | null> {
+  async getRoutine(id_routine: number, xml?: string): Promise<Routine | string | null> {
     const routine = await this.routineRepository.findOneBy({ id_routine });
 
     if (routine != null) {
@@ -64,7 +64,7 @@ export class RoutineService {
     }
   }
 
-  async updateRoutine(updateRoutineDto: UpdateRoutineDto): Promise<routine> {
+  async updateRoutine(updateRoutineDto: UpdateRoutineDto): Promise<Routine> {
     const routine = await this.routineRepository.findOne({
       where: { id_routine: updateRoutineDto.id_routine },
     });
@@ -77,10 +77,34 @@ export class RoutineService {
     return this.routineRepository.save(routine);
   }
 
-  async deleteRoutine(id_routine: number): Promise<void> {
-    const result = await this.routineRepository.delete(id_routine);
-    if (result.affected === 0) {
-      throw new HttpException('Routine not found', HttpStatus.NOT_FOUND);
-    }
+  async deleteRoutine(id: number): Promise<boolean> {
+    const result = await this.routineRepository.delete(id);
+    return result.affected > 0; 
   }
+  async vincularArchivo(idRoutine: number, fileId: number): Promise<void> {
+    const routine = await this.routineRepository.findOne({
+      where: { id_routine: idRoutine },
+    });
+    
+    if (!routine) {
+      throw new HttpException(
+        `No se encontró una rutina con el ID: ${idRoutine}`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  
+    routine.progress = `Archivo vinculado: ${fileId}`;
+    await this.routineRepository.save(routine);
+  
+    console.log(`Archivo con ID ${fileId} vinculado a la rutina con ID ${idRoutine}`);
+  }
+  async getRoutinesByUser(userId: number) {
+    return this.routineRepository.find({
+      where: { user: { id_user: userId } }, 
+      relations: ['user'], 
+    });
+  }
+  
+  
+  
 }

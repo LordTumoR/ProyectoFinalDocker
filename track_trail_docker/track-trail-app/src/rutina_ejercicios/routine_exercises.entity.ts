@@ -1,5 +1,5 @@
 import { Exercise } from 'src/exercises/exercises.entity';
-import { routine } from 'src/routine/routine.entity';
+import { Routine } from 'src/routine/routine.entity';
 import { User } from 'src/users/users.entity';
 import {
   Entity,
@@ -19,17 +19,19 @@ export class RoutineExercises {
 
   @Column({ nullable: true })
   date_finish: Date;
+  @Column({ default: false }) 
+  completado: boolean;
 
   @ManyToOne(() => User, (user) => user.routines_exercises,)
   @JoinColumn({ name: 'id_user' })
   user: User;
   
-  @ManyToOne(() => routine, (routine) => routine.routines_exercises,{
+  @ManyToOne(() => Routine, (Routine) => Routine.routines_exercises,{
     cascade: true,
     onDelete:'CASCADE',
   })
   @JoinColumn({ name: 'id_routine' })
-  routines: routine;
+  routines: Routine;
   @ManyToOne(() => Exercise, (exercise) => exercise.routines_exercises, { 
     cascade: true,
     onDelete:'CASCADE',

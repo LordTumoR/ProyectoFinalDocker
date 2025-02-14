@@ -1,4 +1,5 @@
-import { routine } from 'src/routine/routine.entity';
+import { NutritionRecord } from 'src/nutrition record/nutrition_record.entity';
+import { Routine } from 'src/routine/routine.entity';
 import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
 import {
   Entity,
@@ -18,14 +19,14 @@ export class User {
   @Column({ nullable: true }) 
   surname: string;
 
-  @Column({ nullable: true })  
-  password: string;
-
   @Column({ unique: true })
   email: string;
 
   @Column('int', { nullable: true }) 
   weight: number;
+
+  @Column({ nullable: true })  
+  token: string;
 
   @Column({ nullable: true }) 
   dateofbirth: string;
@@ -42,12 +43,19 @@ export class User {
   @Column({ nullable: true }) 
   avatar: string;
 
-  @OneToMany(() => routine, (routine) => routine.user)
-  routines: routine[];
+  @OneToMany(() => Routine, (routine) => routine.user)
+  routines: Routine[];
 
   @OneToMany(() => RoutineExercises, (routineExercises) => routineExercises.user,{
     cascade: true,
     onDelete:'CASCADE',
   })
   routines_exercises: RoutineExercises[];
+
+  @OneToMany(() => NutritionRecord, (nutritionRecord) => nutritionRecord.user, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  nutritionRecords: NutritionRecord[]; 
+  
 }

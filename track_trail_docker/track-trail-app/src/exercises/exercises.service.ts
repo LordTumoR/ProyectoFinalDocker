@@ -7,6 +7,7 @@ import { Exercise } from './exercises.entity';
 import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
 import { Routine } from 'src/routine/routine.entity';
 import { User } from 'src/users/users.entity';
+import { create } from 'domain';
 
 @Injectable()
 export class ExercisesService {
@@ -57,6 +58,8 @@ export class ExercisesService {
           description: createExerciseDto.description,
           images: createExerciseDto.images,
           dateTime: currentDate,
+          repetitions: createExerciseDto.repetitions,
+          weigth: createExerciseDto.weigth,
         });
   
         const savedExercise = await this.exerciseRepository.save(exercise);

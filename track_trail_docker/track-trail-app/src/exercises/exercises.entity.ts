@@ -19,9 +19,17 @@ export class Exercise {
 
   @Column()
   images: string;
+
   @Column()
   dateTime: Date;
 
   @OneToMany(() => RoutineExercises, (routineExercises) => routineExercises.ejercicios)
   routines_exercises: RoutineExercises[];
+
+  @Column()
+  repetitions: number;
+
+  @Column()
+  weigth: number;
+
 }

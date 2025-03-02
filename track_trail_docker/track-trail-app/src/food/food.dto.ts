@@ -1,3 +1,4 @@
+import { IsDate } from '@nestjs/class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
@@ -72,6 +73,17 @@ export class CreateFoodDto {
   @IsNumber()
   @Min(0)
   cholesterol?: number;
+
+  @ApiProperty({ example: 'Desayuno', required: false })
+  @IsOptional()
+  @IsString()
+  mealtype?: string;
+
+  @ApiProperty({
+      example: '2023-01-01T00:00:00.000Z',
+    })
+    @IsDate()
+    dateTime: Date;
 }
 
 export class UpdateFoodDto {
@@ -143,4 +155,15 @@ export class UpdateFoodDto {
   @IsNumber()
   @Min(0)
   cholesterol?: number;
+  
+  @ApiProperty({ example: 'Desayuno', required: false })
+  @IsOptional()
+  @IsString()
+  mealtype?: string;
+
+  @ApiProperty({
+      example: '2023-01-01T00:00:00.000Z',
+    })
+    @IsDate()
+    dateTime: Date;
 }

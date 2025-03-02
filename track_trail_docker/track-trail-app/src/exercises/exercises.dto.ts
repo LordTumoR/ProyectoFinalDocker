@@ -5,6 +5,7 @@ import {
   IsInt,
   Length,
   IsDate,
+  IsNumber,
 } from 'class-validator';
 
 export class CreateExerciseDto {
@@ -36,6 +37,22 @@ export class CreateExerciseDto {
   })
   @IsDate()
   dateTime: Date;
+
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  repetitions?: number;
+
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  weigth?: number;
 }
 
 export class UpdateExerciseDto {
@@ -75,4 +92,20 @@ export class UpdateExerciseDto {
   @IsDate()
   @IsOptional()
   dateTime?: Date;
+
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  repetitions?: number;
+
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  weigth?: number;
 }

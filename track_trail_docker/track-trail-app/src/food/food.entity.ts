@@ -39,6 +39,13 @@ export class Food {
   @Column('float', { nullable: true })
   cholesterol: number; 
 
+  @Column({ nullable: true })
+  mealtype: string;
+
+  @Column()
+  date: Date;
+
+
   @OneToMany(() => NutritionFood, (nutritionFood) => nutritionFood.food)
   nutritionFoods: NutritionFood[];
 }

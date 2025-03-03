@@ -52,7 +52,7 @@ export class CreateExerciseDto {
   })
   @IsNumber()
   @IsOptional()
-  weigth?: number;
+  weight?: number;
 }
 
 export class UpdateExerciseDto {
@@ -107,5 +107,5 @@ export class UpdateExerciseDto {
   })
   @IsNumber()
   @IsOptional()
-  weigth?: number;
+  weight?: number;
 }

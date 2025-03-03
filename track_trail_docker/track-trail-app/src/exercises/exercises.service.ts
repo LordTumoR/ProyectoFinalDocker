@@ -59,7 +59,7 @@ export class ExercisesService {
           images: createExerciseDto.images,
           dateTime: currentDate,
           repetitions: createExerciseDto.repetitions,
-          weigth: createExerciseDto.weigth,
+          weight: createExerciseDto.weight,
         });
   
         const savedExercise = await this.exerciseRepository.save(exercise);

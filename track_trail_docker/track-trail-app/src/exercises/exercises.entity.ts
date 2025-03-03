@@ -30,6 +30,6 @@ export class Exercise {
   repetitions: number;
 
   @Column()
-  weigth: number;
+  weight: number;
 
 }

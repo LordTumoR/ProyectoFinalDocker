@@ -1,3 +1,4 @@
+import { Progress } from 'src/progress/progress.entity';
 import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
 import {
   Entity,
@@ -23,6 +24,9 @@ export class Exercise {
   @Column()
   dateTime: Date;
 
+  @OneToMany(() => Progress, (progress) => progress.exercise) 
+  progress_records: Progress[];
+
   @OneToMany(() => RoutineExercises, (routineExercises) => routineExercises.ejercicios)
   routines_exercises: RoutineExercises[];
 
@@ -31,5 +35,10 @@ export class Exercise {
 
   @Column()
   weight: number;
+
+
+  @Column()
+  sets: number;
+
 
 }

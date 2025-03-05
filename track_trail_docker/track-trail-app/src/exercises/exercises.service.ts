@@ -75,7 +75,7 @@ export class ExercisesService {
           date_start: currentDate,
           date_finish: null,
           completado: false,
-          user: user,  
+          user: user, 
           routines: routine,
           ejercicios: savedExercise,  
         });

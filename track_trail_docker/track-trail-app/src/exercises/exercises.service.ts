@@ -8,6 +8,7 @@ import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity
 import { Routine } from 'src/routine/routine.entity';
 import { User } from 'src/users/users.entity';
 import { create } from 'domain';
+import { Progress } from 'src/progress/progress.entity';
 
 @Injectable()
 export class ExercisesService {
@@ -19,6 +20,8 @@ export class ExercisesService {
     private readonly routineRepository: Repository<Routine>,
     @InjectRepository(RoutineExercises)
     private readonly routineExerciseRepository: Repository<RoutineExercises>, 
+    @InjectRepository(Progress)
+    private readonly progressRepository: Repository<Progress>, 
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>, 
   ) {}
@@ -60,6 +63,8 @@ export class ExercisesService {
           dateTime: currentDate,
           repetitions: createExerciseDto.repetitions,
           weight: createExerciseDto.weight,
+          muscleGroup: createExerciseDto.muscleGroup,
+          sets: createExerciseDto.sets,
         });
   
         const savedExercise = await this.exerciseRepository.save(exercise);
@@ -70,6 +75,18 @@ export class ExercisesService {
         if (!user) {
           throw new Error('Usuario no encontrado');
         }
+        const progress = this.progressRepository.create({
+          exercise: savedExercise,
+          notes: 'Ejercicio añadido recientemente.',
+        });
+      await this.progressRepository.save(progress);
+
+      const user2 = await this.usersRepository.findOne({
+        where: { id_user: userId },  
+      });
+      if (!user2) {
+        throw new Error('Usuario no encontrado');
+      }
   
         const routineExercise = this.routineExerciseRepository.create({
           date_start: currentDate,

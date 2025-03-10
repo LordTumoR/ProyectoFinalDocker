@@ -16,7 +16,7 @@ export class CreateExerciseDto {
 
   @ApiProperty({ example: 'Push-up' })
   @IsString()
-  @Length(1, 500)
+  @Length(1, 40)
   name: string;
 
   @ApiProperty({
@@ -53,6 +53,17 @@ export class CreateExerciseDto {
   @IsNumber()
   @IsOptional()
   weight?: number;
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  sets?: number;
+  @ApiProperty({ example: 'Biceps' })
+  @IsString()
+  @Length(1, 40)
+  muscleGroup: string;
 }
 
 export class UpdateExerciseDto {
@@ -108,4 +119,17 @@ export class UpdateExerciseDto {
   @IsNumber()
   @IsOptional()
   weight?: number;
+
+  @ApiProperty({ example: 'Biceps' })
+  @IsString()
+  @IsOptional()
+  @Length(1, 40)
+  muscleGroup: string;
+  @ApiProperty({
+    example: '10',
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  sets?: number;
 }

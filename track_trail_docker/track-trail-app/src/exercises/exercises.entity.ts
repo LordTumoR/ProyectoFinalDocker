@@ -36,7 +36,8 @@ export class Exercise {
   @Column()
   weight: number;
 
-
+  @Column()
+  muscleGroup: string;
   @Column()
   sets: number;
 

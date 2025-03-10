@@ -9,10 +9,11 @@ import { RoutineExercisesModule } from 'src/rutina_ejercicios/routine_exercises.
 import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity'; 
 import { Routine } from 'src/routine/routine.entity'; 
 import { User } from 'src/users/users.entity';
+import { Progress } from 'src/progress/progress.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Exercise, RoutineExercises, Routine,User]), 
+    TypeOrmModule.forFeature([Exercise, RoutineExercises, Routine,User, Progress]), 
     UtilsModule,
   ],
   controllers: [ExercisesController],

@@ -46,6 +46,10 @@ import { NutritionFoodController } from './nutrition_food/nutritionfood.controll
 import { NotificationModule } from './notification/notification.module';
 import { NotificationController } from './notification/notification.controller';
 import { NotificationService } from './notification/notification.services';
+import { Progress } from './progress/progress.entity';
+import { ProgressModule } from './progress/progress.module';
+import { ProgressController } from './progress/progress.controller';
+import { ProgressService } from './progress/progress.service';
 
 
 @Module({
@@ -69,6 +73,7 @@ import { NotificationService } from './notification/notification.services';
     UtilsModule,
     NutritionFoodModule,
     NotificationModule,
+    ProgressModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -79,6 +84,7 @@ import { NotificationService } from './notification/notification.services';
       Food,
       NutritionRecord,
       UploadEntity,
+      Progress,
     NutritionFood]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -98,15 +104,15 @@ import { NotificationService } from './notification/notification.services';
           NutritionRecord,
           UploadEntity,
           NutritionFood,
-          
+          Progress,
         ],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
   ],
-  controllers: [UsersController, RoutineController, ExercisesController, NotificationController,RoutineExercisesController, FoodController, NutritionRecordController, UploadController, FilesController, NutritionFoodController],
-  providers: [UsersService, RoutineService, ExercisesService, RoutineExercisesService,NotificationService, FoodService, NutritionRecordService,UtilsService, UploadService, FilesService, NutritionFoodService],
+  controllers: [UsersController, RoutineController,ProgressController, ExercisesController, NotificationController,RoutineExercisesController, FoodController, NutritionRecordController, UploadController, FilesController, NutritionFoodController],
+  providers: [UsersService, RoutineService, ProgressService,ExercisesService, RoutineExercisesService,NotificationService, FoodService, NutritionRecordService,UtilsService, UploadService, FilesService, NutritionFoodService],
 })
 export class AppModule {
 }

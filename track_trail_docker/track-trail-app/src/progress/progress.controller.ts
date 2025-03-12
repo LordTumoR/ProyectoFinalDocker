@@ -39,15 +39,6 @@ export class ProgressController {
         }
         return this.progressService.getRepetitionProgress(exerciseIdParsed);
     }
-
-    @Get('training-history')
-    @ApiOperation({ summary: 'Obtener historial de entrenamientos' })
-    @ApiResponse({ status: 200, description: 'Historial de entrenamientos obtenido correctamente.' })
-    @ApiResponse({ status: 500, description: 'Error interno del servidor.' })
-    getTrainingHistory() { 
-        return this.progressService.getWorkoutHistory();
-    }
-
     @Get('personal-records')
     @ApiOperation({ summary: 'Obtener récords personales de los ejercicios' })
     @ApiResponse({ status: 200, description: 'Récords personales obtenidos correctamente.' })
@@ -66,14 +57,6 @@ export class ProgressController {
         if (isNaN(userIdParsed)) {
             throw new HttpException('Invalid user ID', HttpStatus.BAD_REQUEST);
         }
-        return this.progressService.getStreakCount(userIdParsed);
-    }
-
-    @Get('general-summary')
-    @ApiOperation({ summary: 'Obtener resumen general del progreso' })
-    @ApiResponse({ status: 200, description: 'Resumen general obtenido correctamente.' })
-    @ApiResponse({ status: 500, description: 'Error interno del servidor.' })
-    getGeneralSummary() {
-        return this.progressService.getProgressSummary();
+        return this.progressService.getTrainingStreak(userIdParsed);
     }
 }

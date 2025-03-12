@@ -5,11 +5,12 @@ import { Progress } from './progress.entity'; // La entidad Progress
 import { Exercise } from 'src/exercises/exercises.entity';
 import { ProgressController } from './progress.controller';
 import { ProgressService } from './progress.service';
+import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Progress, Exercise]), 
+    TypeOrmModule.forFeature([Progress, Exercise, RoutineExercises]), 
     UtilsModule,
   ],
   controllers: [ProgressController], 

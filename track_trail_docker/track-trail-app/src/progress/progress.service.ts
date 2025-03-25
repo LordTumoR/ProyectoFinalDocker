@@ -16,18 +16,10 @@ export class ProgressService {
     private readonly routineExercisesRepository: Repository<RoutineExercises>,
   ) {}
 
-  async getWeightProgress(exerciseId: number) {
-    const exercise = await this.exerciseRepository.findOne({
-      where: { id_exercises: exerciseId },
-    });
-  
-    if (!exercise) {
-      throw new Error('Ejercicio no encontrado');
-    }
-  
+  async getWeightProgress(muscleGroup: string) {
     const maxWeightExercise = await this.exerciseRepository
       .createQueryBuilder('exercise')
-      .where('exercise.muscleGroup = :muscleGroup', { muscleGroup: exercise.muscleGroup })
+      .where('exercise.muscleGroup = :muscleGroup', { muscleGroup })
       .orderBy('exercise.weight', 'DESC')
       .select(['exercise.weight', 'exercise.name'])
       .getOne();
@@ -35,18 +27,11 @@ export class ProgressService {
     return maxWeightExercise || { message: 'No hay registros de peso para este grupo muscular' };
   }
   
-  async getRepetitionProgress(exerciseId: number) {
-    const exercise = await this.exerciseRepository.findOne({
-      where: { id_exercises: exerciseId },
-    });
   
-    if (!exercise) {
-      throw new Error('Ejercicio no encontrado');
-    }
-  
+  async getRepetitionProgress(muscleGroup: string) {
     const maxRepsData = await this.exerciseRepository
       .createQueryBuilder('exercise')
-      .where('exercise.muscleGroup = :muscleGroup', { muscleGroup: exercise.muscleGroup })
+      .where('exercise.muscleGroup = :muscleGroup', { muscleGroup })
       .orderBy('exercise.repetitions', 'DESC')
       .addOrderBy('exercise.weight', 'DESC')
       .select(['exercise.repetitions', 'exercise.weight'])
@@ -58,7 +43,7 @@ export class ProgressService {
   
     const maxRepsExercises = await this.exerciseRepository.find({
       where: {
-        muscleGroup: exercise.muscleGroup,
+        muscleGroup,
         repetitions: maxRepsData.repetitions,
         weight: maxRepsData.weight,
       },
@@ -68,12 +53,12 @@ export class ProgressService {
     const exerciseNames = maxRepsExercises.map((ex) => `"${ex.name}"`).join(', ');
   
     return {
-      message: `Tus mejores repeticiones se encuentran en los ejercicios ${exerciseNames} con un peso de ${maxRepsData.weight} kg.`,
-      exercises: maxRepsExercises,
+      message: `Los ejercicios con más repeticiones en ${muscleGroup} son: ${exerciseNames}`,
+      maxRepetitions: maxRepsData.repetitions,
+      weight: maxRepsData.weight,
     };
   }
   
-
   async getTrainingStreak(userId: number): Promise<number> {
     const trainingDates = await this.routineExercisesRepository
       .createQueryBuilder('re')
@@ -83,8 +68,9 @@ export class ProgressService {
       .groupBy('training_date')
       .orderBy('training_date', 'DESC')
       .getRawMany();
-  // Extrae fechas únicas y las convierte en objetos Date tabiem set coje unicos y lo recombierte en array
-    const uniqueDates = [...new Set(trainingDates.map(d => d.training_date))] 
+  
+    // Convertimos a fechas únicas
+    const uniqueDates = [...new Set(trainingDates.map(d => d.training_date))]
       .map(d => new Date(d));
   
     let streak = 0;
@@ -93,17 +79,20 @@ export class ProgressService {
       const diff = (uniqueDates[i].getTime() - uniqueDates[i + 1].getTime()) / (1000 * 60 * 60 * 24);
       const dayData = trainingDates.find(d => d.training_date === uniqueDates[i].toISOString().split('T')[0]);
   
+      if (!dayData) continue; // Si no hay datos para ese día, pasamos al siguiente
+  
       if (diff === 1 && dayData.completed_count > 0) {
         streak++;
       } else if (dayData.completed_count === 0) {
-        break;  
+        break;
       } else {
-        break; 
+        break;
       }
     }
   
-    return streak + (uniqueDates.length > 0 ? 1 : 0); 
+    return streak + (uniqueDates.length > 0 ? 1 : 0);
   }
+  
   
 
   async getPersonalRecords() {

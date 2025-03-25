@@ -24,8 +24,11 @@ export class Exercise {
   @Column()
   dateTime: Date;
 
-  @OneToMany(() => Progress, (progress) => progress.exercise) 
+  @OneToMany(() => Progress, (progress) => progress.exercise, {
+    cascade: true,
+  })
   progress_records: Progress[];
+  
 
   @OneToMany(() => RoutineExercises, (routineExercises) => routineExercises.ejercicios)
   routines_exercises: RoutineExercises[];

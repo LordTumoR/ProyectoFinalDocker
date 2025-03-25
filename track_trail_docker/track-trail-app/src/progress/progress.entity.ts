@@ -6,8 +6,12 @@ export class Progress {
   @PrimaryGeneratedColumn()
   id_progress: number;
 
-  @ManyToOne(() => Exercise, (exercise) => exercise.id_exercises, { eager: true })
-  exercise: Exercise; 
+  @ManyToOne(() => Exercise, (exercise) => exercise.id_exercises, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  exercise: Exercise;
+  
 
   @CreateDateColumn()
   date: Date; 

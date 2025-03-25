@@ -14,31 +14,25 @@ import { ProgressService } from './progress.service';
 export class ProgressController {
     constructor(private readonly progressService: ProgressService) {}
 
-    @Get('evolution-weight/:exerciseId')
-    @ApiOperation({ summary: 'Obtener evolución del peso levantado' })
+    @Get('evolution-weight/:muscleGroup')
+    @ApiOperation({ summary: 'Obtener evolución del peso levantado por grupo muscular' })
     @ApiResponse({ status: 200, description: 'Evolución de peso levantado obtenida correctamente.' })
-    @ApiResponse({ status: 400, description: 'ID de ejercicio inválido.' })
+    @ApiResponse({ status: 400, description: 'Grupo muscular inválido.' })
     @ApiResponse({ status: 500, description: 'Error interno del servidor.' })
-    getEvolutionWeight(@Param('exerciseId') exerciseId: string) {
-        const exerciseIdParsed = parseInt(exerciseId);
-        if (isNaN(exerciseIdParsed)) {
-            throw new HttpException('Invalid exercise ID', HttpStatus.BAD_REQUEST);
-        }
-        return this.progressService.getWeightProgress(exerciseIdParsed);
+    getEvolutionWeight(@Param('muscleGroup') muscleGroup: string) {
+      return this.progressService.getWeightProgress(muscleGroup);
     }
+    
 
-    @Get('evolution-reps-sets/:exerciseId')
-    @ApiOperation({ summary: 'Obtener evolución de repeticiones y sets' })
-    @ApiResponse({ status: 200, description: 'Evolución de repeticiones y sets obtenida correctamente.' })
-    @ApiResponse({ status: 400, description: 'ID de ejercicio inválido.' })
-    @ApiResponse({ status: 500, description: 'Error interno del servidor.' })
-    getEvolutionRepsSets(@Param('exerciseId') exerciseId: string) {
-        const exerciseIdParsed = parseInt(exerciseId);
-        if (isNaN(exerciseIdParsed)) {
-            throw new HttpException('Invalid exercise ID', HttpStatus.BAD_REQUEST);
-        }
-        return this.progressService.getRepetitionProgress(exerciseIdParsed);
-    }
+   @Get('evolution-reps-sets/:muscleGroup')
+@ApiOperation({ summary: 'Obtener evolución de repeticiones y sets por grupo muscular' })
+@ApiResponse({ status: 200, description: 'Evolución de repeticiones y sets obtenida correctamente.' })
+@ApiResponse({ status: 400, description: 'Grupo muscular inválido.' })
+@ApiResponse({ status: 500, description: 'Error interno del servidor.' })
+getEvolutionRepsSets(@Param('muscleGroup') muscleGroup: string) {
+  return this.progressService.getRepetitionProgress(muscleGroup);
+}
+
     @Get('personal-records')
     @ApiOperation({ summary: 'Obtener récords personales de los ejercicios' })
     @ApiResponse({ status: 200, description: 'Récords personales obtenidos correctamente.' })

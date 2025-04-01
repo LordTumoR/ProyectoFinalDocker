@@ -22,4 +22,10 @@ export class NutritionRecord {
 
   @Column({ type: 'date', nullable: true })
   date: Date | null;
+
+  @Column({ nullable: true })
+  imageurl: string;
+
+  @Column({ default: false })
+  isFavorite: boolean;
 }

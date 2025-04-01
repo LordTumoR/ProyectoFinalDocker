@@ -12,12 +12,15 @@ import { UtilsService } from 'src/utils/utils.service';
 import { UtilsModule } from 'src/utils/utils.module';
 import { UsersModule } from 'src/users/users.module';
 import { UsersService } from 'src/users/users.service';
+import { Exercise } from 'src/exercises/exercises.entity';
+import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
+import { Progress } from 'src/progress/progress.entity';
 @Module({
   imports: [
     UsersModule,
     UtilsModule,
     RoutineModule,
-    TypeOrmModule.forFeature([UploadEntity, Routine]),
+    TypeOrmModule.forFeature([UploadEntity, Routine, Exercise,RoutineExercises,Progress]), 
     ServeStaticModule.forRoot({
       rootPath: path.resolve('./src/upload/img'),
       serveRoot: '/upload',

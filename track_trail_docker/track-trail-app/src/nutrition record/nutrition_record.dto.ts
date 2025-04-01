@@ -11,6 +11,8 @@ import {
   ValidateNested,
   IsNotEmpty,
   IsDate,
+  Length,
+  IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer'; 
 import { CreateNutritionFoodDto } from 'src/nutrition_food/nutritionfood.dto';
@@ -56,6 +58,17 @@ export class CreateNutritionRecordDto {
   @IsOptional()
   @IsDate()
   date?: Date;
+
+  @ApiProperty({ example: 'https://asofgndfskpfodgn.com/imagen.png', required: false })
+  @IsOptional()
+  @IsString()
+  @Length(1, 800)
+    imageurl?: string;
+    
+    @ApiProperty({ example: false, required: false })
+    @IsOptional()
+    @IsBoolean()
+    isFavorite?: boolean;
 }
 
 export class UpdateNutritionRecordDto {
@@ -101,4 +114,16 @@ export class UpdateNutritionRecordDto {
   @IsOptional()
   @IsDate()
   date?: Date;
+
+  @ApiProperty({ example: 'https://asofgndfskpfodgn.com/imagen.png', required: false })
+  @IsOptional()
+  @IsString()
+  @Length(1, 800)
+  imageurl?: string;
+
+  @ApiProperty({ example: false, required: false })
+  @IsOptional()
+  @IsBoolean()
+  isFavorite?: boolean;
+
 }

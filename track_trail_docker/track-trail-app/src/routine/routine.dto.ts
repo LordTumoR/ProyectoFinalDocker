@@ -51,6 +51,11 @@ export class CreateRoutineDto {
   @IsString()
   @Length(1, 800)
   imageurl?: string;
+
+  @ApiProperty({ example: false, required: false })
+    @IsOptional()
+    @IsBoolean()
+    isFavorite?: boolean;
 }
 
 export class UpdateRoutineDto {
@@ -97,4 +102,9 @@ export class UpdateRoutineDto {
   @IsString()
   @Length(1, 800)
   imageurl?: string;
+
+  @ApiProperty({ example: false, required: false })
+    @IsOptional()
+    @IsBoolean()
+    isFavorite?: boolean;
 }

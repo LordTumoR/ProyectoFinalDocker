@@ -44,7 +44,9 @@ export class Food {
 
   @Column()
   date: Date;
-
+  
+  @Column({ nullable: true })
+  imageurl: string;
 
   @OneToMany(() => NutritionFood, (nutritionFood) => nutritionFood.food)
   nutritionFoods: NutritionFood[];

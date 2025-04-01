@@ -41,6 +41,7 @@ export class Exercise {
 
   @Column()
   muscleGroup: string;
+  
   @Column()
   sets: number;
 

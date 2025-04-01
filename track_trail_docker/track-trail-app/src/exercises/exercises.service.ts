@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UtilsService } from '../utils/utils.service';
 import { CreateExerciseDto, UpdateExerciseDto } from './exercises.dto';
 import { Exercise } from './exercises.entity';
@@ -45,7 +45,7 @@ export class ExercisesService {
     if (!routine) {
       throw new Error('La rutina especificada no existe.');
     }
-  
+    
     const routineDuration = routine.duration;
     const startDate = new Date(createExerciseDto.dateTime);
     const dayOfWeek = startDate.getDay();

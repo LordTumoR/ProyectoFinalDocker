@@ -84,6 +84,12 @@ export class CreateFoodDto {
     })
     @IsDate()
     dateTime: Date;
+
+  @ApiProperty({ example: 'https://asofgndfskpfodgn.com/imagen.png', required: false })
+  @IsOptional()
+  @IsString()
+  @Length(1, 800)
+  imageurl?: string;
 }
 
 export class UpdateFoodDto {
@@ -166,4 +172,10 @@ export class UpdateFoodDto {
     })
     @IsDate()
     dateTime: Date;
+
+    @ApiProperty({ example: 'https://asofgndfskpfodgn.com/imagen.png', required: false })
+    @IsOptional()
+    @IsString()
+    @Length(1, 800)
+    imageurl?: string;
 }

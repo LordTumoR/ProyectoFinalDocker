@@ -49,7 +49,7 @@ export class NutritionFoodService {
   async createNutritionRecord(createNutritionRecordDto: CreateNutritionRecordDto): Promise<NutritionRecord> {
     console.log('createNutritionRecord method called'); 
 
-    const { user_id, nutritionFoods, date, name, description } = createNutritionRecordDto;
+    const { user_id, nutritionFoods, date, name, description,imageurl } = createNutritionRecordDto;
 
     const user = await this.userRepository.findOne({ where: { id_user: user_id } });
     if (!user) {
@@ -61,6 +61,7 @@ export class NutritionFoodService {
       description,
       user,
       date,
+      imageurl,
     });
 
     const savedNutritionRecord = await this.nutritionRecordRepository.save(newNutritionRecord);

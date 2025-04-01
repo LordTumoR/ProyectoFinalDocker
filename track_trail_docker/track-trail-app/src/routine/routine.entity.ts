@@ -36,6 +36,9 @@ export class Routine {
   @Column()
   imageurl: string;
 
+  @Column({ default: false })
+  isFavorite: boolean;
+
   @ManyToOne(() => User, (user) => user.routines,{
     cascade: true,
     onDelete:'CASCADE',

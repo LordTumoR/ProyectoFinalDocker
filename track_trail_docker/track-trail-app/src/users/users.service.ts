@@ -42,21 +42,37 @@ export class UsersService {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
     }
   }
-
   async updateUser(updateUserDto: UpdateUserDto): Promise<User> {
+    // Log para ver el DTO recibido
+    console.log('updateUserDto recibido:', updateUserDto);
+  
     const user = await this.usersRepository.findOne({
       where: { id_user: updateUserDto.id_user },
     });
-
+  
     if (!user) {
       throw new Error('Usuario no encontrado');
     }
-
-
+  
+    // Log para ver el usuario encontrado
+    console.log('Usuario encontrado:', user);
+  
+    // Log para verificar la fecha que se está recibiendo y procesando
+    if (updateUserDto.dateofbirth) {
+      console.log('Fecha de nacimiento recibida:', updateUserDto.dateofbirth);
+    } else {
+      console.log('No se ha recibido fecha de nacimiento');
+    }
+  
+    // Merging los datos del DTO con el usuario encontrado
     this.usersRepository.merge(user, updateUserDto);
+  
+    // Log para verificar el estado del objeto `user` antes de guardarlo
+    console.log('Usuario antes de guardar:', user);
+  
     return this.usersRepository.save(user);
   }
-
+  
   async deleteUser(id_user: number): Promise<void> {
     await this.usersRepository.delete(id_user);
   }

@@ -22,20 +22,22 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column('int', { nullable: true }) 
+  @Column('double', { nullable: true }) 
   weight: number;
+  
+  @Column('double', { nullable: true }) 
+  height: number;
+  
 
   @Column({ nullable: true })  
   token: string;
 
-  @Column({ nullable: true }) 
-  dateofbirth: string;
+  @Column({ type: 'date', nullable: true }) 
+dateofbirth: Date;
+
 
   @Column({ nullable: true })  
   sex: string;
-
-  @Column('int', { nullable: true }) 
-  height: number;
 
   @Column({ default: 0 })
   role: number;

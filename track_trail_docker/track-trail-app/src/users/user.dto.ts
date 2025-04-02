@@ -1,10 +1,10 @@
-// user.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
   IsOptional,
   IsInt,
+  IsNumber,
   Min,
   Max,
   Length,
@@ -31,8 +31,8 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 70 })
-  @IsInt()
+  @ApiProperty({ example: 70.5 })
+  @IsNumber()
   weight: number;
 
   @ApiProperty({ example: 'token-abc123' })
@@ -40,19 +40,15 @@ export class CreateUserDto {
   token: string;
   
   @ApiProperty({ example: '1990-01-01', required: false, description: 'Formato YYYY-MM-DD' })
-  @IsString()
   @IsOptional()
-  @Matches(/^\d{4}-\d{2}-\d{2}$/, {
-    message: 'dateofbirth must be in format YYYY-MM-DD',
-  })
-  dateofbirth: string;
+  dateofbirth: Date;
   
   @ApiProperty({ example: 'masculino' })
   @IsString()
   sex: string;
   
-  @ApiProperty({ example: 175 })
-  @IsInt()
+  @ApiProperty({ example: 175.2 })
+  @IsNumber()
   height: number;
 
   @ApiProperty({ example: 1 })
@@ -61,7 +57,7 @@ export class CreateUserDto {
   @Max(2)
   role: number;
 
-  @ApiProperty({ example: 'https://asofgndfskpfodgn.com/avatar.jpg' })
+  @ApiProperty({ example: 'https://example.com/avatar.jpg' })
   @IsString()
   avatar: string;
 }
@@ -89,8 +85,8 @@ export class UpdateUserDto {
   @IsOptional()
   email?: string;
 
-  @ApiProperty({ example: 70, required: false })
-  @IsInt()
+  @ApiProperty({ example: 70.5, required: false })
+  @IsNumber()
   @IsOptional()
   weight?: number;
 
@@ -100,20 +96,16 @@ export class UpdateUserDto {
   token?: string;
 
   @ApiProperty({ example: '1990-01-01', required: false, description: 'Formato YYYY-MM-DD' })
-  @IsString()
   @IsOptional()
-  @Matches(/^\d{4}-\d{2}-\d{2}$/, {
-    message: 'dateofbirth tiene que ser YYYY-MM-DD',
-  })
-  dateofbirth?: string;
+  dateofbirth?: Date;
   
   @ApiProperty({ example: 'masculino', required: false })
   @IsString()
   @IsOptional()
   sex?: string;
   
-  @ApiProperty({ example: 175, required: false })
-  @IsInt()
+  @ApiProperty({ example: 175.2, required: false })
+  @IsNumber()
   @IsOptional()
   height?: number;
 
@@ -124,7 +116,7 @@ export class UpdateUserDto {
   @Max(1)
   role?: number;
 
-  @ApiProperty({ example: 'https://asofgndfskpfodgn.com/avatar-nuevo.jpg', required: false })
+  @ApiProperty({ example: 'https://example.com/avatar-nuevo.jpg', required: false })
   @IsOptional()
   @IsString()
   avatar?: string;

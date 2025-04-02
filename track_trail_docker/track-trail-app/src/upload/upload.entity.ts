@@ -1,4 +1,4 @@
-import { Routine } from 'src/routine/routine.entity';
+import { Routine } from '../routine/routine.entity';
 import {
     Entity,
     Column,

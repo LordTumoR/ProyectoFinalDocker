@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Progress } from './progress.entity';
-import { Exercise } from 'src/exercises/exercises.entity';
-import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
+import { Exercise } from '../exercises/exercises.entity';
+import { RoutineExercises } from '../rutina_ejercicios/routine_exercises.entity';
 
 @Injectable()
 export class ProgressService {

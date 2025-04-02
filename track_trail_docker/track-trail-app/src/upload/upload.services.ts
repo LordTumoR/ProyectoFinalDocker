@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UploadEntity } from './upload.entity';
 import * as path from 'path';
-import { Routine } from 'src/routine/routine.entity';
+import { Routine } from '../routine/routine.entity';
 
 @Injectable()
 export class UploadService {

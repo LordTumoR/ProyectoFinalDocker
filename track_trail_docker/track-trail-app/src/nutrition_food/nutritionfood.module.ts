@@ -3,11 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { NutritionFood } from './nutritionfood.entity';
 import { NutritionFoodController } from './nutritionfood.controller';
 import { NutritionFoodService } from './nutritionfood.service';
-import { NutritionRecord } from 'src/nutrition record/nutrition_record.entity';
-import { Food } from 'src/food/food.entity';
-import { User } from 'src/users/users.entity';
-import { NutritionRecordModule } from 'src/nutrition record/nutrition_record.module';
-import { UsersModule } from 'src/users/users.module';
+import { NutritionRecord } from '../nutrition_record/nutrition_record.entity';
+import { Food } from '../food/food.entity';
+import { User } from '../users/users.entity';
+import { NutritionRecordModule } from '../nutrition_record/nutrition_record.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [

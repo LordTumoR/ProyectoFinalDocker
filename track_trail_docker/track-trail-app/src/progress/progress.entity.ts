@@ -1,4 +1,4 @@
-import { Exercise } from 'src/exercises/exercises.entity';
+import { Exercise } from '../exercises/exercises.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from 'typeorm';
 
 @Entity()

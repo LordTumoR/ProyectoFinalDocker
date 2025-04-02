@@ -3,7 +3,7 @@ import { FilesController } from './files.controller';
 import { MulterModule } from '@nestjs/platform-express';
 import { GridFsMulterConfigService } from './multer-config.services';
 import { FilesService } from './files.services';
-import { RoutineModule } from 'src/routine/routine.module';
+import { RoutineModule } from '../routine/routine.module';
 
 
 @Module({

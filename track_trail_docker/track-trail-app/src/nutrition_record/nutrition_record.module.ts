@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/users/users.entity';
-import { Food } from 'src/food/food.entity';
+import { User } from '../users/users.entity';
+import { Food } from '../food/food.entity';
 import { NutritionRecord } from './nutrition_record.entity';
 import { NutritionRecordController } from './nutrition_record.controller';
 import { NutritionRecordService } from './nutrition_record.service';
-import { NutritionFood } from 'src/nutrition_food/nutritionfood.entity';
+import { NutritionFood } from '../nutrition_food/nutritionfood.entity';
 
 @Module({
   imports: [

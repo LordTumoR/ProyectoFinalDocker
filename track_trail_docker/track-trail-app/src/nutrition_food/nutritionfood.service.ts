@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NutritionFood } from './nutritionfood.entity';
 import { CreateNutritionFoodDto, UpdateNutritionFoodDto } from './nutritionfood.dto';
-import { NutritionRecord } from 'src/nutrition record/nutrition_record.entity';
-import { Food } from 'src/food/food.entity';
-import { CreateNutritionRecordDto } from 'src/nutrition record/nutrition_record.dto';
-import { User } from 'src/users/users.entity';
+import { NutritionRecord } from '../nutrition_record/nutrition_record.entity';
+import { Food } from '../food/food.entity';
+import { CreateNutritionRecordDto } from '../nutrition_record/nutrition_record.dto';
+import { User } from '../users/users.entity';
 
 @Injectable()
 export class NutritionFoodService {
@@ -35,16 +35,17 @@ export class NutritionFoodService {
         where: { id },
         relations: ['nutritionRecord', 'food'],
       });
-
+  
       if (!nutritionFood) {
-        throw new Error('Nutrition food not found');
+        throw new HttpException('Nutrition food not found', HttpStatus.NOT_FOUND);
       }
-
+  
       return nutritionFood;
     } catch (err) {
-      throw new Error('Error fetching nutrition food: ' + err.message);
+      throw new HttpException('Error fetching nutrition food: ' + err.message, HttpStatus.NOT_FOUND);
     }
   }
+  
 
   async createNutritionRecord(createNutritionRecordDto: CreateNutritionRecordDto): Promise<NutritionRecord> {
     console.log('createNutritionRecord method called'); 

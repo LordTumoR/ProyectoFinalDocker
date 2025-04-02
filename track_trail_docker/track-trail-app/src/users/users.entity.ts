@@ -1,6 +1,6 @@
-import { NutritionRecord } from 'src/nutrition record/nutrition_record.entity';
-import { Routine } from 'src/routine/routine.entity';
-import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
+import { NutritionRecord } from '../nutrition_record/nutrition_record.entity';
+import { Routine } from '../routine/routine.entity';
+import { RoutineExercises } from '../rutina_ejercicios/routine_exercises.entity';
 import {
   Entity,
   Column,

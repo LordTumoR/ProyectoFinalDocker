@@ -13,8 +13,8 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateRoutineExercisesDto, UpdateRoutineExercisesDto } from './routine_exercises.dto';
 import { RoutineExercisesService } from './routine_exercises.service';
-import { UsersService } from 'src/users/users.service';
-import { RoutineService } from 'src/routine/routine.service';
+import { UsersService } from '../users/users.service';
+import { RoutineService } from '../routine/routine.service';
 
 @ApiTags('Routine Exercises')
 @Controller('routine-exercises')

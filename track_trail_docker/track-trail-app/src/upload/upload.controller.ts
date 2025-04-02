@@ -14,7 +14,7 @@ import {
   import { FileInterceptor } from '@nestjs/platform-express';
   import { multerConfig } from '../multer.config';
 import { UploadService } from './upload.services';
-import { RoutineService } from 'src/routine/routine.service';
+import { RoutineService } from '../routine/routine.service';
 
 
   

@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { User } from 'src/users/users.entity';
-import { NutritionFood } from 'src/nutrition_food/nutritionfood.entity';
+import { User } from '../users/users.entity';
+import { NutritionFood } from '../nutrition_food/nutritionfood.entity';
 
 @Entity()
 export class NutritionRecord {

@@ -13,7 +13,7 @@ import {
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CreateRoutineDto, UpdateRoutineDto } from './routine.dto';
 import { RoutineService } from './routine.service';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 
 @Controller('routines')
 export class RoutineController {

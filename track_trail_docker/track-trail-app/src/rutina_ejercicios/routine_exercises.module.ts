@@ -4,8 +4,8 @@ import { UtilsModule } from '../utils/utils.module';
 import { RoutineExercisesController } from './routine_exercises.controller';
 import { RoutineExercises } from './routine_exercises.entity';
 import { RoutineExercisesService } from './routine_exercises.service';
-import { UsersModule } from 'src/users/users.module';
-import { RoutineModule } from 'src/routine/routine.module';
+import { UsersModule } from '../users/users.module';
+import { RoutineModule } from '../routine/routine.module';
 
 
 @Module({

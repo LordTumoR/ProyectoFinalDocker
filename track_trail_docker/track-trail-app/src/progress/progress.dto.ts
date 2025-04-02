@@ -1,5 +1,5 @@
 import { IsBoolean, IsOptional, IsDate, IsString } from 'class-validator';
-import { Exercise } from 'src/exercises/exercises.entity';
+import { Exercise } from '../exercises/exercises.entity';
 
 export class ProgressDTO {
   @IsOptional() 

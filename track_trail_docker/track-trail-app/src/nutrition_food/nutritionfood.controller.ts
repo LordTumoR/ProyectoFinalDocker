@@ -13,9 +13,9 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateNutritionFoodDto, UpdateNutritionFoodDto } from './nutritionfood.dto';
 import { NutritionFoodService } from './nutritionfood.service';
-import { NutritionRecordService } from 'src/nutrition record/nutrition_record.service';
-import { CreateNutritionRecordDto } from 'src/nutrition record/nutrition_record.dto';
-import { UsersService } from 'src/users/users.service';
+import { NutritionRecordService } from '../nutrition_record/nutrition_record.service';
+import { CreateNutritionRecordDto } from '../nutrition_record/nutrition_record.dto';
+import { UsersService } from '../users/users.service';
 
 @ApiTags('nutrition-foods')
 @Controller('nutrition-foods')

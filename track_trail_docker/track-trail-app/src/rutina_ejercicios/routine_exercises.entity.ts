@@ -1,6 +1,6 @@
-import { Exercise } from 'src/exercises/exercises.entity';
-import { Routine } from 'src/routine/routine.entity';
-import { User } from 'src/users/users.entity';
+import { Exercise } from '../exercises/exercises.entity';
+import { Routine } from '../routine/routine.entity';
+import { User } from '../users/users.entity';
 import {
   Entity,
   Column,

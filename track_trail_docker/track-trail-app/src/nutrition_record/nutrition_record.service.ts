@@ -2,12 +2,12 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { User } from 'src/users/users.entity';
-import { Food } from 'src/food/food.entity';
+import { User } from '../users/users.entity';
+import { Food } from '../food/food.entity';
 import { NutritionRecord } from './nutrition_record.entity';
 import { CreateNutritionRecordDto, UpdateNutritionRecordDto } from './nutrition_record.dto';
-import { NutritionFood } from 'src/nutrition_food/nutritionfood.entity';
-import { CreateNutritionFoodDto } from 'src/nutrition_food/nutritionfood.dto';
+import { NutritionFood } from '../nutrition_food/nutritionfood.entity';
+import { CreateNutritionFoodDto } from '../nutrition_food/nutritionfood.dto';
 
 @Injectable()
 export class NutritionRecordService {

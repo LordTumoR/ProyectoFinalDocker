@@ -1,4 +1,4 @@
-import { NutritionFood } from 'src/nutrition_food/nutritionfood.entity';
+import { NutritionFood } from '../nutrition_food/nutritionfood.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()

@@ -4,11 +4,11 @@ import { Not, Repository } from 'typeorm';
 import { UtilsService } from '../utils/utils.service';
 import { CreateExerciseDto, UpdateExerciseDto } from './exercises.dto';
 import { Exercise } from './exercises.entity';
-import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
-import { Routine } from 'src/routine/routine.entity';
-import { User } from 'src/users/users.entity';
+import { RoutineExercises } from '../rutina_ejercicios/routine_exercises.entity';
+import { Routine } from '../routine/routine.entity';
+import { User } from '../users/users.entity';
 import { create } from 'domain';
-import { Progress } from 'src/progress/progress.entity';
+import { Progress } from '../progress/progress.entity';
 
 @Injectable()
 export class ExercisesService {

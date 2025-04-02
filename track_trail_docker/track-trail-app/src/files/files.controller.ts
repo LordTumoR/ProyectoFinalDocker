@@ -13,7 +13,7 @@ import {
   import { FileResponseVm } from './view-models/file-response-vm.model';
   import { ObjectId } from 'mongodb';
 import { FilesService } from './files.services';
-import { RoutineService } from 'src/routine/routine.service';
+import { RoutineService } from '../routine/routine.service';
   
   @Controller('/files')
   export class FilesController {

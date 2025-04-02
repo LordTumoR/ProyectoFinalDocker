@@ -15,7 +15,7 @@ import {
   IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer'; 
-import { CreateNutritionFoodDto } from 'src/nutrition_food/nutritionfood.dto';
+import { CreateNutritionFoodDto } from '../nutrition_food/nutritionfood.dto';
 
 export class CreateNutritionRecordDto {
   @ApiProperty({ example: 1, required: false })

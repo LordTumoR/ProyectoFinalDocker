@@ -1,5 +1,5 @@
-import { Progress } from 'src/progress/progress.entity';
-import { RoutineExercises } from 'src/rutina_ejercicios/routine_exercises.entity';
+import { Progress } from '../progress/progress.entity';
+import { RoutineExercises } from '../rutina_ejercicios/routine_exercises.entity';
 import {
   Entity,
   Column,
